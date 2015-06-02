@@ -1,0 +1,256 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> expression
+Rule 2     statement -> <empty>
+Rule 3     expression -> expression expression
+Rule 4     expression -> expression UNION expression
+Rule 5     expression -> expression DAGGER
+Rule 6     expression -> expression ASTERISK
+Rule 7     expression -> LPAREN expression RPAREN
+Rule 8     expression -> SYMBOL
+
+Terminals, with rules where they appear
+
+ASTERISK             : 6
+DAGGER               : 5
+LPAREN               : 7
+RPAREN               : 7
+SYMBOL               : 8
+UNION                : 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 1 3 3 4 4 5 6 7
+statement            : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . expression
+    (2) statement -> .
+    (3) expression -> . expression expression
+    (4) expression -> . expression UNION expression
+    (5) expression -> . expression DAGGER
+    (6) expression -> . expression ASTERISK
+    (7) expression -> . LPAREN expression RPAREN
+    (8) expression -> . SYMBOL
+
+    $end            reduce using rule 2 (statement -> .)
+    LPAREN          shift and go to state 3
+    SYMBOL          shift and go to state 2
+
+    expression                     shift and go to state 4
+    statement                      shift and go to state 1
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (8) expression -> SYMBOL .
+
+    UNION           reduce using rule 8 (expression -> SYMBOL .)
+    DAGGER          reduce using rule 8 (expression -> SYMBOL .)
+    ASTERISK        reduce using rule 8 (expression -> SYMBOL .)
+    LPAREN          reduce using rule 8 (expression -> SYMBOL .)
+    SYMBOL          reduce using rule 8 (expression -> SYMBOL .)
+    $end            reduce using rule 8 (expression -> SYMBOL .)
+    RPAREN          reduce using rule 8 (expression -> SYMBOL .)
+
+
+state 3
+
+    (7) expression -> LPAREN . expression RPAREN
+    (3) expression -> . expression expression
+    (4) expression -> . expression UNION expression
+    (5) expression -> . expression DAGGER
+    (6) expression -> . expression ASTERISK
+    (7) expression -> . LPAREN expression RPAREN
+    (8) expression -> . SYMBOL
+
+    LPAREN          shift and go to state 3
+    SYMBOL          shift and go to state 2
+
+    expression                     shift and go to state 5
+
+state 4
+
+    (1) statement -> expression .
+    (3) expression -> expression . expression
+    (4) expression -> expression . UNION expression
+    (5) expression -> expression . DAGGER
+    (6) expression -> expression . ASTERISK
+    (3) expression -> . expression expression
+    (4) expression -> . expression UNION expression
+    (5) expression -> . expression DAGGER
+    (6) expression -> . expression ASTERISK
+    (7) expression -> . LPAREN expression RPAREN
+    (8) expression -> . SYMBOL
+
+    $end            reduce using rule 1 (statement -> expression .)
+    UNION           shift and go to state 7
+    DAGGER          shift and go to state 6
+    ASTERISK        shift and go to state 8
+    LPAREN          shift and go to state 3
+    SYMBOL          shift and go to state 2
+
+    expression                     shift and go to state 9
+
+state 5
+
+    (7) expression -> LPAREN expression . RPAREN
+    (3) expression -> expression . expression
+    (4) expression -> expression . UNION expression
+    (5) expression -> expression . DAGGER
+    (6) expression -> expression . ASTERISK
+    (3) expression -> . expression expression
+    (4) expression -> . expression UNION expression
+    (5) expression -> . expression DAGGER
+    (6) expression -> . expression ASTERISK
+    (7) expression -> . LPAREN expression RPAREN
+    (8) expression -> . SYMBOL
+
+    RPAREN          shift and go to state 10
+    UNION           shift and go to state 7
+    DAGGER          shift and go to state 6
+    ASTERISK        shift and go to state 8
+    LPAREN          shift and go to state 3
+    SYMBOL          shift and go to state 2
+
+    expression                     shift and go to state 9
+
+state 6
+
+    (5) expression -> expression DAGGER .
+
+    UNION           reduce using rule 5 (expression -> expression DAGGER .)
+    DAGGER          reduce using rule 5 (expression -> expression DAGGER .)
+    ASTERISK        reduce using rule 5 (expression -> expression DAGGER .)
+    LPAREN          reduce using rule 5 (expression -> expression DAGGER .)
+    SYMBOL          reduce using rule 5 (expression -> expression DAGGER .)
+    $end            reduce using rule 5 (expression -> expression DAGGER .)
+    RPAREN          reduce using rule 5 (expression -> expression DAGGER .)
+
+
+state 7
+
+    (4) expression -> expression UNION . expression
+    (3) expression -> . expression expression
+    (4) expression -> . expression UNION expression
+    (5) expression -> . expression DAGGER
+    (6) expression -> . expression ASTERISK
+    (7) expression -> . LPAREN expression RPAREN
+    (8) expression -> . SYMBOL
+
+    LPAREN          shift and go to state 3
+    SYMBOL          shift and go to state 2
+
+    expression                     shift and go to state 11
+
+state 8
+
+    (6) expression -> expression ASTERISK .
+
+    UNION           reduce using rule 6 (expression -> expression ASTERISK .)
+    DAGGER          reduce using rule 6 (expression -> expression ASTERISK .)
+    ASTERISK        reduce using rule 6 (expression -> expression ASTERISK .)
+    LPAREN          reduce using rule 6 (expression -> expression ASTERISK .)
+    SYMBOL          reduce using rule 6 (expression -> expression ASTERISK .)
+    $end            reduce using rule 6 (expression -> expression ASTERISK .)
+    RPAREN          reduce using rule 6 (expression -> expression ASTERISK .)
+
+
+state 9
+
+    (3) expression -> expression expression .
+    (3) expression -> expression . expression
+    (4) expression -> expression . UNION expression
+    (5) expression -> expression . DAGGER
+    (6) expression -> expression . ASTERISK
+    (3) expression -> . expression expression
+    (4) expression -> . expression UNION expression
+    (5) expression -> . expression DAGGER
+    (6) expression -> . expression ASTERISK
+    (7) expression -> . LPAREN expression RPAREN
+    (8) expression -> . SYMBOL
+
+  ! shift/reduce conflict for UNION resolved as shift
+  ! shift/reduce conflict for DAGGER resolved as shift
+  ! shift/reduce conflict for ASTERISK resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+  ! shift/reduce conflict for SYMBOL resolved as shift
+    $end            reduce using rule 3 (expression -> expression expression .)
+    RPAREN          reduce using rule 3 (expression -> expression expression .)
+    UNION           shift and go to state 7
+    DAGGER          shift and go to state 6
+    ASTERISK        shift and go to state 8
+    LPAREN          shift and go to state 3
+    SYMBOL          shift and go to state 2
+
+  ! UNION           [ reduce using rule 3 (expression -> expression expression .) ]
+  ! DAGGER          [ reduce using rule 3 (expression -> expression expression .) ]
+  ! ASTERISK        [ reduce using rule 3 (expression -> expression expression .) ]
+  ! LPAREN          [ reduce using rule 3 (expression -> expression expression .) ]
+  ! SYMBOL          [ reduce using rule 3 (expression -> expression expression .) ]
+
+    expression                     shift and go to state 9
+
+state 10
+
+    (7) expression -> LPAREN expression RPAREN .
+
+    UNION           reduce using rule 7 (expression -> LPAREN expression RPAREN .)
+    DAGGER          reduce using rule 7 (expression -> LPAREN expression RPAREN .)
+    ASTERISK        reduce using rule 7 (expression -> LPAREN expression RPAREN .)
+    LPAREN          reduce using rule 7 (expression -> LPAREN expression RPAREN .)
+    SYMBOL          reduce using rule 7 (expression -> LPAREN expression RPAREN .)
+    $end            reduce using rule 7 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 7 (expression -> LPAREN expression RPAREN .)
+
+
+state 11
+
+    (4) expression -> expression UNION expression .
+    (3) expression -> expression . expression
+    (4) expression -> expression . UNION expression
+    (5) expression -> expression . DAGGER
+    (6) expression -> expression . ASTERISK
+    (3) expression -> . expression expression
+    (4) expression -> . expression UNION expression
+    (5) expression -> . expression DAGGER
+    (6) expression -> . expression ASTERISK
+    (7) expression -> . LPAREN expression RPAREN
+    (8) expression -> . SYMBOL
+
+    UNION           reduce using rule 4 (expression -> expression UNION expression .)
+    LPAREN          reduce using rule 4 (expression -> expression UNION expression .)
+    SYMBOL          reduce using rule 4 (expression -> expression UNION expression .)
+    $end            reduce using rule 4 (expression -> expression UNION expression .)
+    RPAREN          reduce using rule 4 (expression -> expression UNION expression .)
+    DAGGER          shift and go to state 6
+    ASTERISK        shift and go to state 8
+
+  ! DAGGER          [ reduce using rule 4 (expression -> expression UNION expression .) ]
+  ! ASTERISK        [ reduce using rule 4 (expression -> expression UNION expression .) ]
+  ! UNION           [ shift and go to state 7 ]
+  ! LPAREN          [ shift and go to state 3 ]
+  ! SYMBOL          [ shift and go to state 2 ]
+
+    expression                     shift and go to state 9
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for UNION in state 9 resolved as shift
+WARNING: shift/reduce conflict for DAGGER in state 9 resolved as shift
+WARNING: shift/reduce conflict for ASTERISK in state 9 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 9 resolved as shift
+WARNING: shift/reduce conflict for SYMBOL in state 9 resolved as shift
